@@ -11,21 +11,19 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     const copyButton = document.getElementById("btnCopy");
     copyButton.addEventListener("click", function() {
       const textToCopy = decodedUserToken;
-      const textarea = document.createElement("textarea");
-      textarea.value = textToCopy;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-
-      copyButton.textContent = "Copied!";
-      setTimeout(function() {
-        copyButton.textContent = "Click to copy token";
-      }, 2000);
+      
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          copyButton.textContent = "Copied!";
+          setTimeout(function() {
+            copyButton.textContent = "Copy";
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error("Copy failed:", error);
+        });
     });
   } else {
     document.getElementById("userToken").textContent = missingUserToken;
   }
-
-
 });
