@@ -1,2 +1,2 @@
 # chromeExtension
-This is repo for some useful chrome extension that could be using in the project
+This is a repo for some useful Chrome extensions that could be used in the project
